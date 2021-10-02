@@ -74,7 +74,23 @@ a.申请堆外内存
 b.使用弱引用
 
 但是golang呢？
-#### 2.1.2. Queue
+
+#### 2.1.2. Double Buffering
+Double buffering技术适用场景：
+- 在IO操作多的时候做优化，分离计算线程和IO线程、让计算和IO并行。具体来说，让主线程基于主Buffer做内存计算，第二线程基于副Buffer做IO操作。当主Buffer完成计算后，swap这两个buffer。
+详见https://www.youtube.com/watch?v=qdeBmEnv_bI
+或者
+https://mp.weixin.qq.com/s/d4qfu2MxESc1YJV4Ud5mnA
+
+![](double_buffering.png)
+
+- 事务提交，写完整块buffer后通过swap实现commit，避免脏读。计算机渲染图像时候用到的Double Buffer就是这种思想，见https://www.youtube.com/watch?v=7cRRxlWRl8g
+和 https://www.youtube.com/watch?v=f3tO_gyyLmk
+
+现在，我们的挑战是：
+- [ ] 实现一个通用的Double Buffer数据结构，预留钩子进行扩展
+
+#### 2.1.3. Queue
 
 ##### 阻塞队列
 
