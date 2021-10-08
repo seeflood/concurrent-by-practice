@@ -202,7 +202,9 @@ https://www.coursera.org/learn/concurrent-programming-in-java/lecture/B2lJf/4-2-
 
 [lock free data structures](https://www.youtube.com/watch?v=DdAV7891-OA&list=PLVe-2wcL84b9G9o7KPubp6NO0nqI1a-Qp&index=5)
 
-
+#### 2.1.4. BitSet  
+- [ ] 实现一个并发安全的bitset
+  
 ### 2.2. Utils
 #### 2.2.1. Thread Pool
 
