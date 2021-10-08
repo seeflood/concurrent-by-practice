@@ -126,7 +126,9 @@ https://www.jianshu.com/p/1bf7a4c34cf3
 
 ##### DelayQueue
 
-- [x] 使用DelayQueue实现一个超时自动删key的cache
+- [ ] 用Golang实现一个DelayQueue
+  
+- [x] (java)使用DelayQueue实现一个超时自动删key的cache
 
 参考https://www.cnblogs.com/fengjian/p/5169003.html
 
