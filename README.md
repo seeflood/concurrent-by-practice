@@ -75,6 +75,8 @@ b.使用弱引用
 
 但是golang呢？
 
+- [ ] 实现一个支持配ttl的cache
+
 #### 2.1.2. Double Buffering
 Double buffering技术适用场景：
 - 在IO操作多的时候做优化，分离计算线程和IO线程、让计算和IO并行。具体来说，让主线程基于主Buffer做内存计算，第二线程基于副Buffer做IO操作。当主Buffer完成计算后，swap这两个buffer。
