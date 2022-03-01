@@ -210,6 +210,9 @@ https://www.coursera.org/learn/concurrent-programming-in-java/lecture/B2lJf/4-2-
 - [ ] 实现一个并发安全的bitset
   
 ### 2.2. Utils
+#### 2.2.0. once.Do
+- [ ] 在其他语言中实现 golang的`once.Do`工具
+
 #### 2.2.1. Thread Pool
 
 - [ ] 实现一个线程池
