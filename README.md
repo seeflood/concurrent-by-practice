@@ -32,6 +32,9 @@ go标准库里没有Semaphore,可以自己写一个
   
 - [ ] 用信号量实现生产消费模式  
 ### 1.3. Monitor & Lock
+- 用读写锁封装一个并发安全的 map
+
+见 [go/pkg/primitives/lock/concurrent_map.go](go/pkg/primitives/lock/concurrent_map.go)
 
 - [x] 用信号量实现锁
 
