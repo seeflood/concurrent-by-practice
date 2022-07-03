@@ -10,31 +10,24 @@ This repo lists some interesting and challenging puzzles about concurrent progra
 **Can you solve them on yourself?**
 
 (Since below are copied from my note, part of them are written in chinese)
+
 # 并发编程挑战:你能解决这些问题吗？
 
 ## 1. Primitives
 
-### 1.1. 多线程同步
-
-- [x] [多线程循环打印](https://juejin.im/post/5c89b9515188257e5b2befdd)
-
-我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
-
-
-- [x] [leetcode上的并发编程题](https://leetcode-cn.com/problemset/concurrency/)
-
-### 1.2. Semaphore
-- [x] 用go语言实现Semaphore
+### 1.1. Semaphore
+- [ ] 用go语言实现Semaphore
 
 go标准库里没有Semaphore,可以自己写一个
 
 提示：用channel
   
 - [ ] 用信号量实现生产消费模式  
-### 1.3. Monitor & Lock
-- 用读写锁封装一个并发安全的 map
 
-见 [go/pkg/primitives/lock/concurrent_map.go](go/pkg/primitives/lock/concurrent_map.go)
+### 1.2. Monitor & Lock
+- [x] 用读写锁封装一个并发安全的 map
+
+题解: [go/pkg/primitives/lock/concurrent_map.go](go/pkg/primitives/lock/concurrent_map.go)
 
 - [x] 用信号量实现锁
 
@@ -42,7 +35,7 @@ go标准库里没有Semaphore,可以自己写一个
  
 - [x] 实现一个读写锁
 
-我写了[题解](https://www.jianshu.com/p/4c3be783884f)
+我写了[题解文章](https://www.jianshu.com/p/4c3be783884f)
 
 
 - [ ] 用信号量实现读写锁
@@ -55,52 +48,54 @@ Tips: 看看操作系统课程里怎么说
 
 - [x] 实现不可重入锁。
 
-参考：[网上的实现](https://kanonjz.github.io/2017/12/27/reentrantlock-and-spinlock/)允许没持有锁的线程unlock，不安全。请实现一个安全的不可重入锁
+参考：[网上的实现](https://kanonjz.github.io/2017/12/27/reentrantlock-and-spinlock/) 允许没持有锁的线程unlock，不安全。请实现一个安全的不可重入锁
 
 - [ ] 实现公平/非公平锁
 
 - [ ] 实现公平/非公平的读写锁
 
-### 1.4. channel
+### 1.3. channel
+- [x] 用 channel 实现"不可重入锁"
+  
+题解: [go/pkg/primitives/lock/lock.go](go/pkg/primitives/lock/lock.go)
+
+cons:
+允许没持有锁的线程unlock，不安全。因为 go 没有 ThreadLocal 或者"获取当前 goroutine ID" 之类的 API，我不知道咋解决这个问题。
+  
 - [ ] 并发打印
->有四个 goroutine，编号为 1、2、3、4。每秒钟会有一个 goroutine 打印出它自己的编号，要求你编写一个程序，让输出的编号总是按照 1、2、3、4、1、2、3、4、……的顺序打印出来。
+>问题：有四个 goroutine，编号为 1、2、3、4。每秒钟会有一个 goroutine 打印出它自己的编号，要求你编写一个程序，让输出的编号总是按照 1、2、3、4、1、2、3、4、……的顺序打印出来。
+
+### 1.4. 用基础原语做多线程同步
+
+- [x] [多线程循环打印](https://juejin.im/post/5c89b9515188257e5b2befdd)
+
+我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
+
+- [x] 10 个线程/goroutine 并发增加计数器
+>问题：创建 10 个 线程/goroutine，同时不断地对一个变量（count）进行加 1 操作，每个 goroutine 负责执行 10 万次的加 1 操作，我们期望的最后计数的结果是 10 * 100000 = 1000000 (一百万)
+
+题解：
+
+用锁的解法 [go/pkg/primitives/lock/counter/counter.go](go/pkg/primitives/lock/counter/counter.go)
+
+lock-free 解法 [go/pkg/primitives/lock/counter/cas/counter.go](go/pkg/primitives/lock/counter/cas/counter.go)
+
+- [x] [leetcode上的并发编程题](https://leetcode-cn.com/problemset/concurrency/)
+
+- [ ] 并发度 10 的爬虫
+
+>问题：实现一个函数，入参是一个 url 数组，函数逐个发起 http 请求、获取返回结果，最后函数返回结果数组。要求并发度10。发起http 请求可以用伪代码写，不必真发起请求。
+
 
 ## 2. Utilities
 ### 2.1. Concurrent Data Structures
 
-#### 2.1.1. Cache
-- [ ] 用golang实现一个`<key,value>`缓存数据结构，本质上是并发安全的Map，但是要求有缓存加载锁(类似于java中的Guava库)
+#### 2.1.1. Queue
 
-- [ ] 优化：保证没有OOM或者频繁GC问题
+##### Unbounded queue
+- [ ] 基于 golang channel 实现一个无界队列
 
-java可以选择：
-
-a.申请堆外内存
-
-b.使用弱引用
-
-但是golang呢？
-
-- [ ] 实现一个支持配ttl的cache
-
-#### 2.1.2. Double Buffering
-Double buffering技术适用场景：
-- 在IO操作多的时候做优化，分离计算线程和IO线程、让计算和IO并行。具体来说，让主线程基于主Buffer做内存计算，第二线程基于副Buffer做IO操作。当主Buffer完成计算后，swap这两个buffer。
-详见https://www.youtube.com/watch?v=qdeBmEnv_bI
-或者
-https://mp.weixin.qq.com/s/d4qfu2MxESc1YJV4Ud5mnA
-
-![](double_buffering.png)
-
-- 事务提交，写完整块buffer后通过swap实现commit，避免脏读。计算机渲染图像时候用到的Double Buffer就是这种思想，见https://www.youtube.com/watch?v=7cRRxlWRl8g
-和 https://www.youtube.com/watch?v=f3tO_gyyLmk
-
-现在，我们的挑战是：
-- [ ] 实现一个通用的Double Buffer数据结构，预留钩子进行扩展
-
-#### 2.1.3. Queue
-
-##### 阻塞队列
+##### Blocking queue
 
 - [x] Implement a blocking queue based on array
 
@@ -132,10 +127,18 @@ https://www.jianshu.com/p/1bf7a4c34cf3
 
 - [ ] 挑战4.阅读lock-free、nonblocking algorithms相关资料
 
-##### DelayQueue
+##### Non-blocking queue
+- [ ] 基于 golang channel 实现一个 non-blocking queue
+- [ ] 实现lock-free queue
+
+https://www.coursera.org/learn/concurrent-programming-in-java/lecture/B2lJf/4-2-concurrent-queue
+
+[lock free data structures](https://www.youtube.com/watch?v=DdAV7891-OA&list=PLVe-2wcL84b9G9o7KPubp6NO0nqI1a-Qp&index=5)
+
+##### Delay Queue
 
 - [ ] 用Golang实现一个DelayQueue
-  
+
 - [x] (java)使用DelayQueue实现一个超时自动删key的cache
 
 参考https://www.cnblogs.com/fengjian/p/5169003.html
@@ -172,17 +175,17 @@ https://juejin.im/post/5d2d3d39e51d45775c73dd8b
 - [x] 挑战7.理解crontab原理
 
   - cronb表达式解析、求next()的算法
-  
+
   https://blog.csdn.net/u014798316/article/details/46460697
-  
+
   https://blog.csdn.net/ukulelepku/article/details/54310035
-  
+
   https://stackoverflow.com/questions/321494/calculate-when-a-cron-job-will-be-executed-then-next-time
-  
+
   - crontab定时任务原理
-  
+
   https://cloud.tencent.com/developer/article/1183262
-  
+
   https://www.quora.com/How-does-cron-work
 
   https://blog.csdn.net/coder_xia/article/details/60871082
@@ -204,13 +207,35 @@ https://cloud.google.com/storage/docs/exponential-backoff?hl=zh-cn
 - [ ] 挑战2：讲讲TCP中的指数退避拿来干嘛的，指数退避 和 AIMD 啥关系?
 
 
-##### non-blocking queue
+#### 2.1.2. Cache
+- [ ] 用golang实现一个`<key,value>`缓存数据结构，本质上是并发安全的Map，但是要求有缓存加载锁(类似于java中的Guava库)
 
-- [ ] 实现lock-free queue
+- [ ] 优化：保证没有OOM或者频繁GC问题
 
-https://www.coursera.org/learn/concurrent-programming-in-java/lecture/B2lJf/4-2-concurrent-queue
+java可以选择：
 
-[lock free data structures](https://www.youtube.com/watch?v=DdAV7891-OA&list=PLVe-2wcL84b9G9o7KPubp6NO0nqI1a-Qp&index=5)
+a.申请堆外内存
+
+b.使用弱引用
+
+但是golang呢？
+
+- [ ] 实现一个支持配ttl的cache
+
+#### 2.1.3. Double Buffering
+Double buffering技术适用场景：
+- 在IO操作多的时候做优化，分离计算线程和IO线程、让计算和IO并行。具体来说，让主线程基于主Buffer做内存计算，第二线程基于副Buffer做IO操作。当主Buffer完成计算后，swap这两个buffer。
+  详见https://www.youtube.com/watch?v=qdeBmEnv_bI
+  或者
+  https://mp.weixin.qq.com/s/d4qfu2MxESc1YJV4Ud5mnA
+
+![](double_buffering.png)
+
+- 事务提交，写完整块buffer后通过swap实现commit，避免脏读。计算机渲染图像时候用到的Double Buffer就是这种思想，见https://www.youtube.com/watch?v=7cRRxlWRl8g
+  和 https://www.youtube.com/watch?v=f3tO_gyyLmk
+
+现在，我们的挑战是：
+- [ ] 实现一个通用的Double Buffer数据结构，预留钩子进行扩展
 
 #### 2.1.4. BitSet  
 - [ ] 实现一个并发安全的bitset
