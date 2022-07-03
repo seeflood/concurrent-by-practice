@@ -16,11 +16,15 @@ This repo lists some interesting and challenging puzzles about concurrent progra
 ## 1. Primitives
 
 ### 1.1. Semaphore
-- [ ] 用go语言实现Semaphore
+- [x] 用go语言实现Semaphore
 
 go标准库里没有Semaphore,可以自己写一个
 
 提示：用channel
+
+题解: [go/pkg/primitives/semaphore/semaphore.go](go/pkg/primitives/semaphore/semaphore.go)
+
+思路是先用 channel 实现一个无界队列，再用无界队列实现 Semaphore
   
 - [ ] 用信号量实现生产消费模式  
 
@@ -35,7 +39,7 @@ go标准库里没有Semaphore,可以自己写一个
  
 - [x] 实现一个读写锁
 
-我写了[题解文章](https://www.jianshu.com/p/4c3be783884f)
+题解: 我写了[解题笔记](https://www.jianshu.com/p/4c3be783884f)
 
 
 - [ ] 用信号量实现读写锁
@@ -69,7 +73,7 @@ cons:
 
 - [x] [多线程循环打印](https://juejin.im/post/5c89b9515188257e5b2befdd)
 
-我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
+题解: 我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
 
 - [x] 10 个线程/goroutine 并发增加计数器
 >问题：创建 10 个 线程/goroutine，同时不断地对一个变量（count）进行加 1 操作，每个 goroutine 负责执行 10 万次的加 1 操作，我们期望的最后计数的结果是 10 * 100000 = 1000000 (一百万)
@@ -93,7 +97,11 @@ lock-free 解法 [go/pkg/primitives/lock/counter/cas/counter.go](go/pkg/primitiv
 #### 2.1.1. Queue
 
 ##### Unbounded queue
-- [ ] 基于 golang channel 实现一个无界队列
+- [x] 基于 golang channel 实现一个无界队列
+
+题解: [go/pkg/utils/queue/unbounded.go](go/pkg/utils/queue/unbounded.go)
+
+参考资料: https://blog.zeromake.com/pages/ultimete-channel/
 
 ##### Blocking queue
 
