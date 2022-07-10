@@ -22,15 +22,15 @@ go标准库里没有Semaphore,可以自己写一个
 
 提示：用channel
 
-题解(有界 Semaphore): [go/pkg/primitives/semaphore/bounded semaphore.go](go/pkg/primitives/semaphore/bounded semaphore.go)
+题解(有界 Semaphore): [go/pkg/primitives/semaphore/bounded semaphore.go](go/pkg/primitives/semaphore/bounded semaphore.go) 
 
-之所以叫"有界" Semaphore，是因为信号数量有限，比如信号数量最大是3，当前信号数量如果已经是 3了，再调 Semaphore.Release() 就会阻塞住，无法让信号数量变成 4.
+>之所以叫"有界" Semaphore，是因为信号数量有限，比如信号数量最大是3，当前信号数量如果已经是 3了，再调 Semaphore.Release() 就会阻塞住，无法让信号数量变成 4.
 
 题解(无界 Semaphore): [go/pkg/primitives/semaphore/semaphore.go](go/pkg/primitives/semaphore/semaphore.go)
 
-Semaphore.Release() 永远不会阻塞住。比如当前信号数量是 3，再调 Semaphore.Release() 会让信号数量变成 4
-
-思路是先用 channel 实现一个无界队列，再用无界队列实现 Semaphore
+>Semaphore.Release() 永远不会阻塞住。比如当前信号数量是 3，再调 Semaphore.Release() 会让信号数量变成 4
+>
+>实现思路是先用 channel 实现一个无界队列，再用无界队列实现 Semaphore
   
 - [ ] 用信号量实现生产消费模式  
 
