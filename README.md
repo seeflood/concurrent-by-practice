@@ -88,8 +88,13 @@ java: 我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
 - 类似的题目: 并发打印
 >问题：有四个 goroutine，编号为 1、2、3、4。每秒钟会有一个 goroutine 打印出它自己的编号，要求你编写一个程序，让输出的编号总是按照 1、2、3、4、1、2、3、4、……的顺序打印出来。
 
-- 类似的题目
+- 类似的题目: leetcode 1114
+- 类似的题目: leetcode 1115
   
+- [ ] [Leetcode 1116. 打印零与奇偶数](https://leetcode.cn/classic/problems/print-zero-even-odd/description/)
+
+go 题解: 
+
 #### 1.4.2. 并发度 k
 - [x] 10 个线程/goroutine 并发增加计数器
 
@@ -138,6 +143,7 @@ go 题解: [go/pkg/primitives/job/concurrent/crawler_from_seed.go](go/pkg/primit
 
 ##### Unbounded queue
 - [x] 基于 golang channel 实现一个无界队列
+> 问题：golang channel 其实是个有界队列。你能否实现一个无界队列呢？
 
 题解: [go/pkg/utils/queue/unbounded.go](go/pkg/utils/queue/unbounded.go)
 
