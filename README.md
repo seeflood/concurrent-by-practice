@@ -79,11 +79,25 @@ cons:
 
 - [x] [多线程循环打印](https://juejin.im/post/5c89b9515188257e5b2befdd)
 
-题解: 
+>问题：通过N个线程顺序循环打印从0至100，如给定N=3则输出:
+> 
+> thread0: 0
+>
+> thread1: 1
+> 
+> thread2: 2
+> 
+> thread0: 3
+> 
+> thread1: 4
+>
+> .....
 
-go: [go/pkg/primitives/job/sequential/printer.go](go/pkg/primitives/job/sequential/printer.go)
+go 题解: [go/pkg/primitives/job/sequential/printer.go](go/pkg/primitives/job/sequential/printer.go)
 
-java: 我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
+java 题解（用 Semaphore 实现）: [java/examples/src/main/java/io/github/seeflood/concurrent/primitives/job/sequential/Printer.java](java/examples/src/main/java/io/github/seeflood/concurrent/primitives/job/sequential/Printer.java)
+
+java 题解（用 Monitor 实现）: 我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
 
 - 类似的题目: 并发打印
 >问题：有四个 goroutine，编号为 1、2、3、4。每秒钟会有一个 goroutine 打印出它自己的编号，要求你编写一个程序，让输出的编号总是按照 1、2、3、4、1、2、3、4、……的顺序打印出来。
