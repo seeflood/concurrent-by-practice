@@ -115,7 +115,9 @@ java 题解（用 Monitor 实现）: 我写了篇[解题笔记](https://www.jian
 
 go 题解: 
 
-- [ ] [Leetcode 1117. H2O 生成](https://leetcode.cn/problems/building-h2o/)
+- [x] [Leetcode 1117. H2O 生成](https://leetcode.cn/problems/building-h2o/)
+
+go 题解: [go/pkg/primitives/job/sequential/h2o.go](go/pkg/primitives/job/sequential/h2o.go)
 
 java 题解: [《并发编程时，如何写复杂的任务编排？ 》](https://www.jianshu.com/p/64cc6c0706f3)
 
@@ -332,7 +334,7 @@ go 题解: [go/pkg/utils/async/do_with_timeout.go](go/pkg/utils/async/do_with_ti
 
 #### 2.2.3. Thread Pool
 
-- [ ] 实现一个线程池
+- [ ] 实现一个线程池/协程池
 
 - [ ] 实现CompletionService
 
