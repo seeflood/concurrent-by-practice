@@ -1,4 +1,4 @@
-# concurrent_challenges
+# concurrent-by-practice
 From an abstract view,the concurrent programming tech stack is a stack of building blocks: higher level blocks are built upon lower level blocks and try to make it easier for programmers to use.
 
 ![](hie.png)
@@ -65,17 +65,36 @@ Tips: 看看操作系统课程里怎么说
 
 cons:
 允许没持有锁的线程unlock，不安全。因为 go 没有 ThreadLocal 或者"获取当前 goroutine ID" 之类的 API，我不知道咋解决这个问题。
-  
-- [ ] 并发打印
->问题：有四个 goroutine，编号为 1、2、3、4。每秒钟会有一个 goroutine 打印出它自己的编号，要求你编写一个程序，让输出的编号总是按照 1、2、3、4、1、2、3、4、……的顺序打印出来。
+
+- [ ] select 处理 chan 数组，数组长度不确定
+
+提示：使用反射
+
+- [ ] 实现 Or-Done 模式
+> 有多个任务，只要有任意一个任务执行完，我们就想获得这个信号，这就是 Or-Done 模式。
+> 比如，你发送同一个请求到多个微服务节点，只要任意一个微服务节点返回结果，就算成功
 
 ### 1.4. 用基础原语做多线程同步
 
+这类题目会让你"用多线程执行一批任务，完成后返回/打印结果"。
+
+#### 1.4.1. 并发度 1
+这类题目让你（虽然）用多线程执行一批任务，（但是）让多线程按照某种顺序**串行**执行。也就是说，虽然用了多线程，但是并发度只有1.
+
 - [x] [多线程循环打印](https://juejin.im/post/5c89b9515188257e5b2befdd)
 
-题解: 我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
+题解: 
 
+go: [go/pkg/primitives/job/sequential/printer.go](go/pkg/primitives/job/sequential/printer.go)
+
+java: 我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
+
+- 类似的题目: 并发打印
+>问题：有四个 goroutine，编号为 1、2、3、4。每秒钟会有一个 goroutine 打印出它自己的编号，要求你编写一个程序，让输出的编号总是按照 1、2、3、4、1、2、3、4、……的顺序打印出来。
+
+#### 1.4.2. 并发度 k
 - [x] 10 个线程/goroutine 并发增加计数器
+
 >问题：创建 10 个 线程/goroutine，同时不断地对一个变量（count）进行加 1 操作，每个 goroutine 负责执行 10 万次的加 1 操作，我们期望的最后计数的结果是 10 * 100000 = 1000000 (一百万)
 
 题解：
@@ -84,12 +103,35 @@ cons:
 
 lock-free 解法 [go/pkg/primitives/lock/counter/cas/counter.go](go/pkg/primitives/lock/counter/cas/counter.go)
 
-- [x] [leetcode上的并发编程题](https://leetcode-cn.com/problemset/concurrency/)
+- [ ] [leetcode上的并发编程题](https://leetcode-cn.com/problemset/concurrency/)
 
-- [ ] 并发度 10 的爬虫
+- [x] 批量发起 http 请求，并发度 10
 
 >问题：实现一个函数，入参是一个 url 数组，函数逐个发起 http 请求、获取返回结果，最后函数返回结果数组。要求并发度10。发起http 请求可以用伪代码写，不必真发起请求。
+> 
+> 即:
+> 
+> func fetch(urls []string) []string {
+> }
 
+题解：[go/pkg/primitives/job/concurrent/crawler.go](go/pkg/primitives/job/concurrent/crawler.go)
+
+- [x] 挑战1：有时间限制
+
+还是上面的问题，但现在每次发起 http 请求要花 2s的时间，限制 5 秒内爬取、5秒后返回爬到的结果，并且取消执行中的 goroutine
+
+提示: 经典的"两阶段取消"模式
+
+题解: [go/pkg/primitives/job/concurrent/crawler_timeout.go](go/pkg/primitives/job/concurrent/crawler_timeout.go)
+
+- [x] [LeetCode 1242. Web Crawler Multithreaded](https://last2win.com/2020/02/12/LeetCode-1242-Web-Crawler-Multithreaded/)
+
+> Given a url startUrl and an interface HtmlParser, implement a Multi-threaded web crawler to crawl all links that are under the same hostname as startUrl.
+Return all urls obtained by your web crawler in any order.
+
+java 题解: https://www.jianshu.com/p/64cc6c0706f3
+
+go 题解: [go/pkg/primitives/job/concurrent/crawler_from_seed.go](go/pkg/primitives/job/concurrent/crawler_from_seed.go)
 
 ## 2. Utilities
 ### 2.1. Concurrent Data Structures
@@ -249,10 +291,18 @@ Double buffering技术适用场景：
 - [ ] 实现一个并发安全的bitset
   
 ### 2.2. Utils
-#### 2.2.0. once.Do
+#### 2.2.1. once.Do
 - [ ] 在其他语言中实现 golang的`once.Do`工具
 
-#### 2.2.1. Thread Pool
+#### 2.2.2. 把"阻塞操作"封装成"非阻塞操作"
+
+- [ ] 封装一个工具类: 把某个"阻塞操作"封装成"非阻塞操作"
+
+- [x] 封装一个工具类: 执行某个阻塞操作时，限制超时时间
+
+go 题解: [go/pkg/utils/async/do_with_timeout.go](go/pkg/utils/async/do_with_timeout.go)
+
+#### 2.2.3. Thread Pool
 
 - [ ] 实现一个线程池
 
