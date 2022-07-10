@@ -70,10 +70,6 @@ cons:
 
 提示：使用反射
 
-- [ ] 实现 Or-Done 模式
-> 有多个任务，只要有任意一个任务执行完，我们就想获得这个信号，这就是 Or-Done 模式。
-> 比如，你发送同一个请求到多个微服务节点，只要任意一个微服务节点返回结果，就算成功
-
 ### 1.4. 用基础原语做多线程同步
 
 这类题目会让你"用多线程执行一批任务，完成后返回/打印结果"。
@@ -92,6 +88,8 @@ java: 我写了篇[解题笔记](https://www.jianshu.com/p/1978e0d07bc7)
 - 类似的题目: 并发打印
 >问题：有四个 goroutine，编号为 1、2、3、4。每秒钟会有一个 goroutine 打印出它自己的编号，要求你编写一个程序，让输出的编号总是按照 1、2、3、4、1、2、3、4、……的顺序打印出来。
 
+- 类似的题目
+  
 #### 1.4.2. 并发度 k
 - [x] 10 个线程/goroutine 并发增加计数器
 
@@ -169,7 +167,7 @@ LinkedBlockingQueue的put和take用不同的锁。可以想想，为什么这两
 
 - [ ] 挑战2.0. 使用Disruptor写[生产消费模式题目](https://www.wandouip.com/t5i116221/)
 
-- [x] 挑战2.1. 搞明白[Disruptor](https://coolshell.cn/articles/9169.html)咋做的
+- [x] 挑战2.1. 搞明白[Disruptor](https://coolshell.cn/articles/9169.html) 咋做的
 
 https://www.jianshu.com/p/1bf7a4c34cf3
 
@@ -356,7 +354,7 @@ go 题解: [go/pkg/utils/async/do_with_timeout.go](go/pkg/utils/async/do_with_ti
 
 - [x] 以数据库连接池为例，解释为什么要建立连接池
 
-答：因为[创建连接、销毁连接成本很高](https://mp.weixin.qq.com/s/y8GEAY0R5YXEZZ3erCZJ4A)。这种成本包括传输层的TCP 3次握手、4次分手，也包括应用层的成本（如[数据库建立连接时账号、密码认证](https://zhuanlan.zhihu.com/p/48027559)等。
+答：因为[创建连接、销毁连接成本很高](https://mp.weixin.qq.com/s/y8GEAY0R5YXEZZ3erCZJ4A) 。这种成本包括传输层的TCP 3次握手、4次分手，也包括应用层的成本（如[数据库建立连接时账号、密码认证](https://zhuanlan.zhihu.com/p/48027559)等。
 
 - [ ] 写一个连接池(ssh,ftp,nosql数据库,etcd连接池……任意一种）
 
@@ -386,6 +384,10 @@ go 题解: [go/pkg/utils/async/do_with_timeout.go](go/pkg/utils/async/do_with_ti
 
 问题来源：极客时间上的课，#36
 
+### 3.4. Or-Done 模式
+- [ ] 实现 Or-Done 模式
+> 有多个任务，只要有任意一个任务执行完，我们就想获得这个信号，这就是 Or-Done 模式。
+> 比如，你发送同一个请求到多个微服务节点，只要任意一个微服务节点返回结果，就算成功
 
 ## 4. Models 其他并发编程模型
 
@@ -489,7 +491,7 @@ http://www.codecommit.com/blog/scala/improving-the-stm-multi-version-concurrency
 
 - [ ] 外排
 
-可以去打[mooc](https://www.coursera.org/lecture/gaoji-shuju-jiegou/wai-pai-xu-suan-fa-Mtbyg)的[poj](http://dsalgo.openjudge.cn/)
+可以去打[mooc](https://www.coursera.org/lecture/gaoji-shuju-jiegou/wai-pai-xu-suan-fa-Mtbyg) 的[poj](http://dsalgo.openjudge.cn/)
 
 - [ ] 挑战1. 多线程外排
 
