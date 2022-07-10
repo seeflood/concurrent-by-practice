@@ -344,11 +344,11 @@ go 题解: [go/pkg/utils/async/do_with_timeout.go](go/pkg/utils/async/do_with_ti
 
 ### 3.1. singleton 单例模式
 
-- [x] 写一个[单例模式](https://juejin.im/post/5b50b0dd6fb9a04f932ff53f)的httpclient工具类
+- [x] 写一个[单例模式](https://juejin.im/post/5b50b0dd6fb9a04f932ff53f) 的httpclient工具类
 
-  - [这里](https://time.geekbang.org/column/article/83682)有讲解Double checked Locking写法中volatile的用处
+  - [这里](https://time.geekbang.org/column/article/83682) 有讲解Double checked Locking写法中volatile的用处
   
-  - [这里](https://blog.csdn.net/mnb65482/article/details/80458571)讲解静态内部类为什么线程安全，但缺点是没法传参、不灵活
+  - [这里](https://blog.csdn.net/mnb65482/article/details/80458571) 讲解静态内部类为什么线程安全，但缺点是没法传参、不灵活
 
 - [x] 除了DCL外，练习其他写法
 
@@ -368,7 +368,7 @@ go 题解: [go/pkg/utils/async/do_with_timeout.go](go/pkg/utils/async/do_with_ti
 
 - [x] 实现一个能对线程数限流的对象池（池里有N个资源，同一时间只能有N个线程访问，其他线程取对象时阻塞）
 
-参考[16 | Semaphore：如何快速实现一个限流器？](https://time.geekbang.org/column/article/88499?utm_source=pinpaizhuanqu&utm_medium=geektime&utm_campaign=guanwang&utm_term=guanwang&utm_content=0511)
+题解: 参考[16 | Semaphore：如何快速实现一个限流器？](https://time.geekbang.org/column/article/88499?utm_source=pinpaizhuanqu&utm_medium=geektime&utm_campaign=guanwang&utm_term=guanwang&utm_content=0511)
 
 ### 3.3. 生产消费模式
 
