@@ -37,7 +37,7 @@ go标准库里没有Semaphore,可以自己写一个
 ### 1.2. Monitor & Lock
 - [x] 用读写锁封装一个并发安全的 map
 
-题解: [go/pkg/primitives/lock/concurrent_map.go](go/pkg/primitives/lock/concurrent_map.go)
+题解:  [go/pkg/primitives/lock/concurrent_map.go](go/pkg/primitives/lock/concurrent_map.go)
 
 - [x] 用信号量实现锁
 
@@ -114,6 +114,10 @@ java 题解（用 Monitor 实现）: 我写了篇[解题笔记](https://www.jian
 - [ ] [Leetcode 1116. 打印零与奇偶数](https://leetcode.cn/classic/problems/print-zero-even-odd/description/)
 
 go 题解: 
+
+- [ ] [Leetcode 1117. H2O 生成](https://leetcode.cn/problems/building-h2o/)
+
+java 题解: [《并发编程时，如何写复杂的任务编排？ 》](https://www.jianshu.com/p/64cc6c0706f3)
 
 #### 1.4.2. 并发度 k
 - [x] 10 个线程/goroutine 并发增加计数器
