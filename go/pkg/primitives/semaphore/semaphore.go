@@ -6,10 +6,15 @@ type Semaphore struct {
 	q *queue.UnboundedQueue
 }
 
-func NewSemaphore(cap uint32) *Semaphore {
-	return &Semaphore{
+func NewSemaphore(initialPermits uint32) *Semaphore {
+	s := &Semaphore{
 		q: queue.NewUnboundedQueue(),
 	}
+	var i uint32 = 0
+	for ; i < initialPermits; i++ {
+		s.Release()
+	}
+	return s
 }
 
 func (s *Semaphore) Acquire() {
