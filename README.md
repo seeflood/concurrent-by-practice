@@ -183,8 +183,10 @@ go 题解: [go/pkg/primitives/job/concurrent/crawler_from_seed.go](go/pkg/primit
 
 - [x] Implement a blocking queue based on array
 
-- [ ] 类似题目: [leetcode 1188](https://www.cnblogs.com/Dylan-Java-NYC/p/12302134.html)
+- [x] 类似题目: [leetcode 1188](https://www.cnblogs.com/Dylan-Java-NYC/p/12302134.html)
   
+题解: [java/examples/src/main/java/io/github/seeflood/concurrent/utils/queue/BoundedBlockingQueue.java](java/examples/src/main/java/io/github/seeflood/concurrent/utils/queue/BoundedBlockingQueue.java)
+
 - [ ] 挑战0.Implement a blocking queue based on linkedlist
 
 参考[two lock queue算法](http://www.cs.rochester.edu/research/synchronization/pseudocode/queues.html)
