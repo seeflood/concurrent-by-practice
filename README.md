@@ -121,6 +121,10 @@ go 题解: [go/pkg/primitives/job/sequential/h2o.go](go/pkg/primitives/job/seque
 
 java 题解: [《并发编程时，如何写复杂的任务编排？ 》](https://www.jianshu.com/p/64cc6c0706f3)
 
+- [x] [Leetcode 1195](https://leetcode.cn/classic/problems/fizz-buzz-multithreaded/description/)
+
+go 题解: [go/pkg/primitives/job/sequential/fizz_buzz.go](go/pkg/primitives/job/sequential/fizz_buzz.go)
+
 #### 1.4.2. 并发度 k
 - [x] 10 个线程/goroutine 并发增加计数器
 
@@ -179,6 +183,8 @@ go 题解: [go/pkg/primitives/job/concurrent/crawler_from_seed.go](go/pkg/primit
 
 - [x] Implement a blocking queue based on array
 
+- [ ] 类似题目: [leetcode 1188](https://www.cnblogs.com/Dylan-Java-NYC/p/12302134.html)
+  
 - [ ] 挑战0.Implement a blocking queue based on linkedlist
 
 参考[two lock queue算法](http://www.cs.rochester.edu/research/synchronization/pseudocode/queues.html)
@@ -322,6 +328,13 @@ Double buffering技术适用场景：
   
 ### 2.2. Utils
 #### 2.2.1. once.Do
+
+- [x] 自己写一个 go 语言的 sync.Once
+
+题解1: [go/pkg/utils/my_sync/once.go](go/pkg/utils/my_sync/once.go)
+
+题解2: [go/pkg/utils/my_sync/once2.go](go/pkg/utils/my_sync/once2.go)
+
 - [ ] 在其他语言中实现 golang的`once.Do`工具
 
 #### 2.2.2. 把"阻塞操作"封装成"非阻塞操作"
