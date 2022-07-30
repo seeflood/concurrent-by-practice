@@ -111,9 +111,9 @@ java 题解（用 Monitor 实现）: 我写了篇[解题笔记](https://www.jian
 - 类似的题目: leetcode 1114
 - 类似的题目: leetcode 1115
   
-- [ ] [Leetcode 1116. 打印零与奇偶数](https://leetcode.cn/classic/problems/print-zero-even-odd/description/)
+- [x] [Leetcode 1116. 打印零与奇偶数](https://leetcode.cn/classic/problems/print-zero-even-odd/description/)
 
-go 题解: 
+go 题解: [go/pkg/primitives/job/sequential/zero_even_odd.go](go/pkg/primitives/job/sequential/zero_even_odd.go) 
 
 - [x] [Leetcode 1117. H2O 生成](https://leetcode.cn/problems/building-h2o/)
 
@@ -135,8 +135,6 @@ go 题解: [go/pkg/primitives/job/sequential/fizz_buzz.go](go/pkg/primitives/job
 用锁的解法 [go/pkg/primitives/lock/counter/counter.go](go/pkg/primitives/lock/counter/counter.go)
 
 lock-free 解法 [go/pkg/primitives/lock/counter/cas/counter.go](go/pkg/primitives/lock/counter/cas/counter.go)
-
-- [ ] [leetcode上的并发编程题](https://leetcode-cn.com/problemset/concurrency/)
 
 - [x] 批量发起 http 请求，并发度 10
 
@@ -216,7 +214,14 @@ https://www.jianshu.com/p/1bf7a4c34cf3
 - [ ] 挑战4.阅读lock-free、nonblocking algorithms相关资料
 
 ##### Non-blocking queue
-- [ ] 基于 golang channel 实现一个 non-blocking queue
+- [x] 基于 golang channel 实现一个 non-blocking queue
+  
+题解: [go/pkg/utils/queue/queue.go](go/pkg/utils/queue/queue.go)
+
+- [x] golang 实现一个 blocking queue, 但是能用 context 取消/超时
+  
+题解: [go/pkg/utils/queue/queue.go](go/pkg/utils/queue/queue.go)
+
 - [ ] 实现lock-free queue
 
 https://www.coursera.org/learn/concurrent-programming-in-java/lecture/B2lJf/4-2-concurrent-queue
